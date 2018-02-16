@@ -1,8 +1,10 @@
 const koa = require('koa');
 const app = new koa();
-const router = require('./routers.js');
+const db = require('./Database/database.js');
+const AWS = require('./AWS/updatePoll.js');
 
-app.use(router.routes());
+AWS.poll()
+setTimeout(AWS.checkProducts, 60000);
 
-app.listen(3000);
+app.listen(8080);
 console.log("server on")

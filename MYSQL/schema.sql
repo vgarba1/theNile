@@ -14,18 +14,7 @@ CREATE TABLE`product_info` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE`product_quantity` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `quantity` INTEGER NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
-ALTER TABLE product_quantity
-ADD FOREIGN KEY (id) REFERENCES product_info(id);
 
 
 INSERT INTO product_info (`name`,`category`,`price`,`description`, `quantity`)
 VALUES ('test','test',140,'test', 50);
-
-INSERT INTO product_quantity
-VALUES (1, 10);

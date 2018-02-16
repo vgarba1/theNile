@@ -7,18 +7,25 @@
   "node": ">=7.6.0",
   "npm": ">=3.10.10"
  },
+ "scripts": {
+  "test": "node ./node_modules/mocha/bin/mocha"
+  },
  "author": "Viktor Garba",
  "license": "ISC",
  "dependencies": {
+  "assert": "^1.4.1",
+  "aws-sdk": "^2.189.0",
+  "aws-sqs": "0.0.6",
   "axios": ">=0.17.1",
   "body-parser": "^1.18.2",
+  "chai": "^4.1.2",
   "file-loader": "^1.1.6",
-  "increase-memory-limit": "^1.0.6",
   "koa": "^2.4.1",
   "koa-mount": "^3.0.0",
   "koa-router": "^7.3.0",
   "koa-static": "^4.0.2",
   "koa-static-server": "^1.3.3",
+  "mocha": "^5.0.0",
   "mysql": "^2.15.0",
   "nodemon": "^1.14.11"
  }
