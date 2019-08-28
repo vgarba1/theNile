@@ -13,31 +13,31 @@ let poll = () => {
 		MaxNumberOfMessages: 10,
 		VisibilityTimeout:10,
 		WaitTimeSeconds: 5
-    }
-	sqs.receiveMessage(params, (err, data) => {
-	if(err){
-		throw err
-	} else {
-        index = []
-        receipts = []
-        if(data.Messages){
-	        data.Messages.forEach((each) => {
-	        	index.push(each.Body)
-	        	receipts.push({ 
-	        		ReceiptHandle: each.ReceiptHandle,
-	        		Id: each.MessageId
-	        	})
-	        })
-        }
-        if(index.length){
-            db.updateInventory(index)
-        }
-        if(receipts.length){
-            deleteMessages(receipts, updateQueue)
-        }
-        setTimeout(poll, 0)
 	}
-  })
+	sqs.receiveMessage(params, (err, data) => {
+	    if (err) {
+		throw err
+	    } else {
+		index = []
+		receipts = []
+		if(data.Messages){
+		    data.Messages.forEach((each) => {
+		    index.push(each.Body)
+		    receipts.push({ 
+		        ReceiptHandle: each.ReceiptHandle,
+			Id: each.MessageId
+		    })
+		})
+	    }
+	    if(index.length){
+                db.updateInventory(index)
+	    }
+	    if(receipts.length){
+                deleteMessages(receipts, updateQueue)
+	    }
+	    setTimeout(poll, 0)
+        }
+    })
 }
 
 let checkProducts = (url) => {
@@ -47,9 +47,9 @@ let checkProducts = (url) => {
 		VisibilityTimeout: 30
 	}
 	sqs.receiveMessage(params, (err, data) => {
-	  if(data.Messages && data.Messages.length > 0){
-        db.addInventory(data.Messages[0], data.Messages[0].ReceiptHandle)
-      }
+		if(data.Messages && data.Messages.length > 0){
+        		db.addInventory(data.Messages[0], data.Messages[0].ReceiptHandle)
+      	 	}
 	})
 }
 
